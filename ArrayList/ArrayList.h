@@ -63,14 +63,14 @@ public:
 
 	void pop_back() {
 		if (empty())
-			throw out_of_range("You can't remove element for the Array because it's Empty");
+			throw underflow_error("You can't remove element for the Array because it's Empty");
 		else
 			capacity--;
 	}
 
 	void pop_front() {
 		if (empty())
-			throw out_of_range("You can't remove element for the Array because it's Empty");
+			throw underflow_error("You can't remove element for the Array because it's Empty");
 		else {
 
 			for (int i = 0; i < capacity - 1; i++)
@@ -124,7 +124,7 @@ public:
 			return arr[i];
 	}
 
-	void popValue(T n) { // remove the value from the array
+	void erase(T n) { // remove the value from the array
 
 		if (empty())
 			throw out_of_range("You can't remove element for the Array because it's Empty");
