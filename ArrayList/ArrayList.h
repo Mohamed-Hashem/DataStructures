@@ -18,6 +18,13 @@ class ArrayList {
 		delete[] temp;
 	}
 
+	bool full() {
+		if (capacity == max_capacity - 1)
+			return true;
+		else
+			return false;
+	}
+
 public:
 	ArrayList() {
 		resize();
@@ -34,15 +41,8 @@ public:
 			return false;
 	}
 
-	bool isFull() {
-		if (capacity == max_capacity - 1)
-			return true;
-		else
-			return false;
-	}
-
 	void push_back(T val) {
-		if (isFull())
+		if (full())
 			expand_capacity();
 
 		arr[capacity] = val;
@@ -51,7 +51,7 @@ public:
 
 	void push_front(T val) {
 
-		if (isFull())
+		if (full())
 			expand_capacity();
 
 		for (int i = capacity; i >= 1; i--) // shift all elements above index
@@ -85,8 +85,7 @@ public:
 	void clear() {
 		capacity = 0;
 		max_capacity = 0;
-		delete arr;
-		arr = nullptr;
+		delete[] arr;
 	}
 
 	void resize(int n = 10) { // resize the array to n size
@@ -148,6 +147,16 @@ public:
 		}
 		else
 			throw invalid_argument("This Value is not Found");
+	}
+
+	int find(int val) { // return true if the value is found in the array
+		for (int i = 0; i < capacity; i++)
+		{
+			if (arr[i] == val)
+				return i;
+		}
+
+		return -1;
 	}
 
 	ArrayList<T>& operator=(ArrayList<T> rightArray) { // deep copy
